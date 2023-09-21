@@ -1,4 +1,3 @@
-using System.Drawing;
 using WebApi_Componentes.Controllers;
 using WebApi_Componentes.Models;
 using WebApi_Componentes.Services;
@@ -11,6 +10,13 @@ public class UnitTestComponente
     private readonly ComponentesController _controlador = new(new FakeComponenteRepository());
 
     [TestMethod]
+    public async Task TestGetComponente()
+    {
+        var componente = await _controlador.GetComponente(2);
+        Assert.IsNotNull(componente);
+    }
+
+    [TestMethod]
     public async Task TestGetAllComponentes()
     {
         var componentes = await _controlador.GetAllComponentes();
@@ -19,17 +25,58 @@ public class UnitTestComponente
     }
 
     [TestMethod]
-    public async Task TestGetComponente()
+    public async Task TestGetComponenteId()
     {
         var componente = await _controlador.GetComponente(2);
-        Assert.IsNotNull(componente);
         Assert.AreEqual(2, componente.Id);
+    }
+
+    [TestMethod]
+    public async Task TestGetComponenteCalor()
+    {
+        var componente = await _controlador.GetComponente(2);
         Assert.AreEqual(12, componente.Calor);
+    }
+
+    [TestMethod]
+    public async Task TestGetComponenteCores()
+    {
+        var componente = await _controlador.GetComponente(2);
         Assert.AreEqual(10, componente.Cores);
+    }
+
+    [TestMethod]
+    public async Task TestGetComponenteCoste()
+    {
+        var componente = await _controlador.GetComponente(2);
         Assert.AreEqual(138, componente.Coste);
+    }
+
+    [TestMethod]
+    public async Task TestGetComponenteDescripcion()
+    {
+        var componente = await _controlador.GetComponente(2);
         Assert.AreEqual("Procesador Intel i7", componente.Descripcion);
+    }
+
+    [TestMethod]
+    public async Task TestGetComponenteMegas()
+    {
+        var componente = await _controlador.GetComponente(2);
         Assert.AreEqual(0, componente.Megas);
+    }
+
+    [TestMethod]
+    public async Task TestGetComponenteNumeroDeSerie()
+    {
+        var componente = await _controlador.GetComponente(2);
         Assert.AreEqual("789-XCD", componente.NumeroDeSerie);
+    }
+
+    [TestMethod]
+    public async Task TestGetComponenteTipoComponente()
+    {
+        var componente = await _controlador.GetComponente(2);
         Assert.AreEqual(TipoComponente.Procesador, componente.Tipo);
     }
 
